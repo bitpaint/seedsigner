@@ -333,10 +333,10 @@ class View:
 
         View.draw.rectangle((0, 0, View.canvas_width, View.canvas_height), outline=0, fill=0)
 
-        line1 = "Powering Down..."
-        line2 = "Please wait about"
-        line3 = "30 seconds before"
-        line4 = "disconnecting power."
+        line1 = "Mise hors tension..."
+        line2 = "Veuillez patienter environ"
+        line3 = "30 secondes avant"
+        line4 = "de déconnecter de l'alimentation."
 
         tw, th = View.draw.textsize(line1, font=View.ASSISTANT22)
         View.draw.text(((240-tw)/2, 45), line1, fill=View.color, font=View.ASSISTANT22)

@@ -96,8 +96,14 @@ class SeedToolsView(View):
             x = keyboard_width + 10
             y = text_entry_display_height - int(row_height / 2)
 
+<<<<<<< Updated upstream
             highlighted_row = 3
             num_possible_rows = 11
+=======
+        View.draw.rectangle((0, 0, View.canvas_width, View.canvas_height), outline=0, fill=0)
+        View.draw.text((75, 2), "Mot graine: " + str(len(self.words)+1), fill=View.color, font=View.IMPACT18)
+        View.draw.text((15, 210), "(choisissez vos mots à droite)", fill=View.color, font=View.IMPACT18)
+>>>>>>> Stashed changes
 
             list_starting_index = self.selected_possible_words_index - highlighted_row
 
@@ -115,6 +121,7 @@ class SeedToolsView(View):
 
                 View.draw.text((x, y + row * row_height), self.possible_words[i], fill=View.color, font=word_font)
 
+<<<<<<< Updated upstream
             # Render the SELECT outline
             if highlight_word:
                 fill_color = View.color
@@ -150,6 +157,29 @@ class SeedToolsView(View):
                 (key_x + arrow_padding + 1, key_y + row_height - arrow_padding)],  # bottom left point
                 fill=arrow_color
             )
+=======
+        # Wait for Button Input (specifically menu selection/press)
+        while True:
+            input = self.buttons.wait_for([B.KEY_UP, B.KEY_DOWN, B.KEY_PRESS, B.KEY_RIGHT, B.KEY_LEFT, B.KEY3, B.KEY2], True, [B.KEY_PRESS, B.KEY_RIGHT, B.KEY_LEFT, B.KEY3, B.KEY2])
+            if input == B.KEY_UP:
+                ret_val = self.gather_passphrase_up()
+            elif input == B.KEY_DOWN:
+                ret_val = self.gather_passphrase_down()
+            elif input == B.KEY_PRESS or input == B.KEY_RIGHT:
+                ret_val = self.gather_passphrase_press()
+            elif input == B.KEY_LEFT:
+                ret_val = self.gather_passphrase_left()
+            elif input == B.KEY2:
+                ret_val = self.gather_passphrase_toggle()
+            elif input == B.KEY3:
+                r = self.controller.menu_view.display_generic_selection_menu(["Editer phrase de passe", "Sauvegarder et quitter", "Quitter sans sauvegarder"], "Actions de phrase de passe", self.passphrase)
+                if r == 1:
+                    ret_val = True
+                elif r == 2: # Save and Exit
+                    return self.passphrase
+                elif r == 3:
+                    return ""
+>>>>>>> Stashed changes
 
             background_color = "#111"
             arrow_color = View.color
@@ -213,6 +243,7 @@ class SeedToolsView(View):
         keyboard.render_keys()
         render_possible_matches()
 
+<<<<<<< Updated upstream
         View.DispShowImage()
 
         # Start the interactive update loop
@@ -222,6 +253,18 @@ class SeedToolsView(View):
                 check_release=True,
                 release_keys=[B.KEY_PRESS, B.KEY2]
             )
+=======
+        # Screen Title
+        View.draw.rectangle((0, 0, View.canvas_width, View.canvas_height), outline=0, fill=0)
+        tw, th = View.draw.textsize("Ajouter phrase de passe", font=View.IMPACT18)
+        View.draw.text(((240 - tw) / 2, 2), "Ajouter phrase de passe", fill=View.color, font=View.IMPACT18)
+
+        # Screen Botton
+        tw, th = View.draw.textsize("utilisez le joystick pour ajouter", font=View.IMPACT18)
+        View.draw.text(((240 - tw) / 2, 197), "utilisez le joystick pour ajouter", fill=View.color, font=View.IMPACT18)
+        tw, th = View.draw.textsize("et supprimer des lettres", font=View.IMPACT18)
+        View.draw.text(((240 - tw) / 2, 217), "ou supprimer des lettres", fill=View.color, font=View.IMPACT18)
+>>>>>>> Stashed changes
 
             if previous_button_is_active:
                 if input == B.KEY_PRESS:
@@ -283,6 +326,7 @@ class SeedToolsView(View):
                 # Update the right-hand possible matches area
                 render_possible_matches()
 
+<<<<<<< Updated upstream
             elif input == B.KEY2:
                 if self.possible_words:
                     final_selection = self.possible_words[self.selected_possible_words_index]
@@ -372,6 +416,16 @@ class SeedToolsView(View):
             text_entry_display.render(f"{num_word}: " + "".join(self.letters))
 
             View.DispShowImage()
+=======
+        # Display message when max passphrase length reached
+        if len(self.passphrase) >= 28:
+            View.draw.text((50,70), "Phrase de passe de 28", fill=View.color, font=View.IMPACT18)
+            View.draw.text((53,90), "caractères atteint", fill=View.color, font=View.IMPACT18)
+
+        # Save Button
+        c_x_offset = 240 - View.IMPACT25.getsize("Exit")[0]
+        View.draw.text((c_x_offset , 172), "Sortir", fill=View.color, font=View.IMPACT22)
+>>>>>>> Stashed changes
 
 
     def draw_passphrase_keyboard_entry(self, existing_passphrase = ""):
@@ -671,6 +725,7 @@ class SeedToolsView(View):
         last_word = finalseed[-1]
 
         self.draw.rectangle((0, 0, View.canvas_width, View.canvas_height), outline=0, fill=0)
+<<<<<<< Updated upstream
         tw, th = self.draw.textsize("The final word is :", font=View.ASSISTANT23)
         self.draw.text(((240 - tw) / 2, 60), "The final word is :", fill=View.color, font=View.ASSISTANT23)
         tw, th = self.draw.textsize(last_word, font=View.ASSISTANT50)
@@ -679,6 +734,15 @@ class SeedToolsView(View):
         tw, th = View.draw.textsize("Right to Continue", font=View.ASSISTANT18)
         View.draw.text(((240 - tw) / 2, 210), "Right to Continue", fill=View.color, font=View.ASSISTANT18)
 
+=======
+        tw, th = self.draw.textsize("Le mot final est :", font=View.IMPACT23)
+        self.draw.text(((240 - tw) / 2, 60), "Le mot final est :", fill=View.color, font=View.IMPACT23)
+        tw, th = self.draw.textsize(last_word, font=View.IMPACT50)
+        self.draw.text(((240 - tw) / 2, 90), last_word, fill=View.color, font=View.IMPACT50)
+
+        tw, th = View.draw.textsize("Droite pour Continuer", font=View.IMPACT18)
+        View.draw.text(((240 - tw) / 2, 210), "Droite pour Continuer", fill=View.color, font=View.IMPACT18)
+>>>>>>> Stashed changes
 
         View.DispShowImage()
 
@@ -813,7 +877,11 @@ class SeedToolsView(View):
     def draw_dice(self, dice_selected):
 
         self.draw.rectangle((0, 0, View.canvas_width, View.canvas_height), outline=0, fill=0)
+<<<<<<< Updated upstream
         self.draw.text((45, 5), "Dice roll: " + str(self.roll_number) + "/99", fill=View.color, font=View.ASSISTANT26)
+=======
+        self.draw.text((45, 5), "Lancé de dés: " + str(self.roll_number) + "/99", fill=View.color, font=View.IMPACT26)
+>>>>>>> Stashed changes
 
         # when dice is selected, rect fill will be orange and ellipse will be black, ellipse outline will be the black
         # when dice is not selected, rect will will be black and ellipse will be orange, ellipse outline will be orange
@@ -897,7 +965,11 @@ class SeedToolsView(View):
             self.draw.ellipse([(208, 174), (220, 186)], outline=View.color, fill=View.color)
 
         # bottom text
+<<<<<<< Updated upstream
         self.draw.text((18, 210), "Press Control Stick to Select", fill=View.color, font=View.ASSISTANT18)
+=======
+        self.draw.text((18, 210), "Appuyez sur la manette de contrôle pour sélectionner", fill=View.color, font=View.IMPACT18)
+>>>>>>> Stashed changes
         View.DispShowImage()
 
         self.dice_selected = dice_selected
@@ -910,7 +982,7 @@ class SeedToolsView(View):
         ret_val = ""
 
         def display_seed_phrase_page(draw, seed_phrase, passphrase=None, bottom=bottom, page_num=1):
-            """ Internal helper method to render 12 words of the seed phrase """
+            """ Méthode d'assistance interne pour afficher 12 mots de la phrase de graine """
             draw.rectangle((0, 0, View.canvas_width, View.canvas_height), outline=0, fill=0)
 
             word_positions = [
@@ -920,16 +992,16 @@ class SeedToolsView(View):
                 (120, 40), (120, 63), (120, 86), (120, 109), (120, 132), (120, 155)
             ]
 
-            title = "Seed Phrase"
+            title = "Phrase de graine"
             word_index_offset = 0
             max_range = len(seed_phrase)    # handles 11 or 12; 23 or 24
             if len(seed_phrase) > 12:
                 max_range -= 12  # we'll iterate up to max_range words on this page
                 if page_num == 1:
-                    title = "Seed Phrase (1/2)"
-                    bottom = "Right to Page 2"
+                    title = "Phrase de graine (1/2)"
+                    bottom = "Droite pour Page 2"
                 else:
-                    title = "Seed Phrase (2/2)"
+                    title = "Phrase de graine (2/2)"
                     word_index_offset = 12  # Skip ahead one page worth of words
 
             tw, th = View.draw.textsize(title, font=View.ASSISTANT18)
@@ -939,9 +1011,15 @@ class SeedToolsView(View):
                 draw.text(word_positions[i], f"{i + 1 + word_index_offset}: " + seed_phrase[i + word_index_offset] , fill=View.color, font=View.ASSISTANT22)
 
             if passphrase and ((len(seed_phrase) > 12 and page_num == 2) or (len(seed_phrase) <= 12 and page_num == 1)):
+<<<<<<< Updated upstream
                 disp_passphrase = "Passphrase: ************"
                 tw, th = View.draw.textsize(disp_passphrase, font=View.ASSISTANT18)
                 draw.text(((240 - tw) / 2, 185), disp_passphrase, fill=View.color, font=View.ASSISTANT18)
+=======
+                disp_passphrase = "Mot de passe: ************"
+                tw, th = View.draw.textsize(disp_passphrase, font=View.IMPACT18)
+                draw.text(((240 - tw) / 2, 185), disp_passphrase, fill=View.color, font=View.IMPACT18)
+>>>>>>> Stashed changes
 
             tw, th = View.draw.textsize(bottom, font=View.ASSISTANT18)
             draw.text(((240 - tw) / 2, 212), bottom, fill=View.color, font=View.ASSISTANT18)
@@ -952,7 +1030,7 @@ class SeedToolsView(View):
         if show_qr_option:
             # In this context there's no next step; just display seed phrase and
             #   offer to show it as a human-transcribable QR.
-            bottom = "Click to Exit; Right for QR Export"
+            bottom = "Click pour sortir; Droite pour QR encxport"
             wait_for_buttons.append(B.KEY_PRESS)
 
         cur_page = 1
@@ -1030,6 +1108,7 @@ class SeedToolsView(View):
         else:
             return None
 
+<<<<<<< Updated upstream
 
     def seed_phrase_as_qr(self, seed_phrase, is_compact_seedqr=False):
         if is_compact_seedqr:
@@ -1045,6 +1124,10 @@ class SeedToolsView(View):
             border=3,
             style=QR.STYLE__ROUNDED).convert("RGBA")
         View.DispShowImageWithText(image, "click to zoom, right to exit", font=View.ASSISTANT18, text_color="BLACK", text_background="ORANGE")
+=======
+        image = qr.qrimage(data, width=240, height=240, border=3)
+        View.DispShowImageWithText(image, "click pour zoomer, droite pour sortir", font=View.IMPACT18, text_color="BLACK", text_background="ORANGE")
+>>>>>>> Stashed changes
 
         input = self.buttons.wait_for([B.KEY_RIGHT, B.KEY_PRESS])
         if input == B.KEY_RIGHT:
@@ -1226,11 +1309,22 @@ class SeedToolsView(View):
 
         return self.words[:]
 
+<<<<<<< Updated upstream
     def seed_phrase_from_camera_image(self):
         reshoot = False
 
         self.controller.menu_view.draw_modal(["Initializing Camera..."])
         self.controller.camera.start_video_stream_mode(resolution=(240, 240), framerate=24, format="rgb")
+=======
+    def read_seed_phrase_qr(self):
+        self.controller.menu_view.draw_modal(["Initialisation de la caméra..."]) # TODO: Move to Controller
+        # initialize camera
+        self.controller.to_camera_queue.put(["start"])
+        # First get blocking, this way it's clear when the camera is ready for the end user
+        self.controller.from_camera_queue.get()
+
+        self.controller.menu_view.draw_modal(["Scan en cours..."], "Graine QR" ,"Gauche pour sortir") # TODO: Move to Controller
+>>>>>>> Stashed changes
 
         # save preview image frames to use as additional entropy below
         preview_images = []
@@ -1247,6 +1341,7 @@ class SeedToolsView(View):
                 # Have to manually update last input time since we're not in a wait_for loop
                 self.buttons.update_last_input_time()
                 self.words = []
+<<<<<<< Updated upstream
                 self.controller.camera.stop_video_stream_mode()
                 return (reshoot, self.words)
 
@@ -1318,6 +1413,12 @@ class SeedToolsView(View):
 
         # self.buttons.trigger_override(True)
         return (reshoot, self.words)
+=======
+        finally:
+            print(f"Arrêt du scanner de code QR")
+            self.camera_loop_timer.stop()
+            self.controller.to_camera_queue.put(["stop"])
+>>>>>>> Stashed changes
 
 
     ###

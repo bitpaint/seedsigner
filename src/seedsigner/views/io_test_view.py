@@ -14,18 +14,28 @@ class IOTestView(View):
         View.__init__(self)
         self.redraw = False
         self.redraw_complete = False
+<<<<<<< Updated upstream
         self.qr_text = "Scan ANY QR Code"
         self.exit = False
+=======
+        self.qr_text = "Scannez n'importe quel code QR"
+>>>>>>> Stashed changes
 
     def display_io_test_screen(self):
-        
+
         # display loading screen
+<<<<<<< Updated upstream
         self.draw_modal(["Initializing I/O Test"])
         print("Initializing I/O Test")
         self.qr_text = "Scan ANY QR Code"
         self.redraw = False
         self.redraw_complete = False
         self.exit = False
+=======
+        self.draw_modal(["Initialisation du test d'E/S"])
+        print("Initialisation du test d'E/S")
+        self.qr_text = "Scannez n'importe quel code QR"
+>>>>>>> Stashed changes
 
         try:
             self.controller.get_instance().camera.start_video_stream_mode()
@@ -78,7 +88,11 @@ class IOTestView(View):
         self.redraw_complete = False
         self.redraw = False
         self.draw.rectangle((0,0,View.canvas_width, View.canvas_height), outline=0, fill=0)
+<<<<<<< Updated upstream
         self.draw.text((45, 5), "Input/Output Check:", fill=View.color, font=View.ASSISTANT18)
+=======
+        self.draw.text((45, 5), "Vérification des entrées/sorties:", fill=View.color, font=View.IMPACT18)
+>>>>>>> Stashed changes
         self.draw.polygon([(61, 89), (80, 46), (99, 89)], outline=View.color, fill=0)
         self.draw.polygon([(51, 100), (8, 119), (51, 138)], outline=View.color, fill=0)
         self.draw.polygon([(109, 100), (152, 119), (109, 138)], outline=View.color, fill=0)
@@ -86,7 +100,11 @@ class IOTestView(View):
         self.draw.ellipse([(61, 99), (99, 141)], outline=View.color, fill=0)
         self.draw.ellipse([(198, 40), (238, 80)], outline=View.color, fill=0)
         self.draw.ellipse([(198, 95), (238, 135)], outline=View.color, fill=0)
+<<<<<<< Updated upstream
         self.draw.text((200, 160), "EXIT", fill=View.color, font=View.ASSISTANT18)
+=======
+        self.draw.text((200, 160), "SORTIR", fill=View.color, font=View.IMPACT18)
+>>>>>>> Stashed changes
         self.draw.rectangle((30, 205, 210, 235), outline=View.color, fill="BLACK")
         tw, th = self.draw.textsize(self.qr_text, font=View.ASSISTANT22)
         self.draw.text(((240 - tw) / 2, 205), self.qr_text, fill=View.color, font=View.ASSISTANT22)
@@ -115,37 +133,36 @@ class IOTestView(View):
             self.draw.polygon([(61, 89), (80, 46), (99, 89)], outline=View.color, fill=View.color)
             View.DispShowImage()
             self.redraw = True
-        
+
     def down_button(self):
         if self.redraw == False and self.redraw_complete == True:
             self.draw.polygon([(61, 151), (80, 193), (99, 151)], outline=View.color, fill=View.color)
             View.DispShowImage()
             self.redraw = True
-        
+
     def left_button(self):
         if self.redraw == False and self.redraw_complete == True:
             self.draw.polygon([(51, 100), (8, 119), (51, 138)], outline=View.color, fill=View.color)
             View.DispShowImage()
             self.redraw = True
-        
+
     def right_button(self):
         if self.redraw == False and self.redraw_complete == True:
             self.draw.polygon([(109, 100), (152, 119), (109, 138)], outline=View.color, fill=View.color)
             View.DispShowImage()
             self.redraw = True
-        
+
     def press_button(self):
         if self.redraw == False and self.redraw_complete == True:
             self.draw.ellipse([(61, 99), (99, 141)], outline=View.color, fill=View.color)
             View.DispShowImage()
             self.redraw = True
-    
+
     def draw_scan_detected(self):
-        self.qr_text = "QR Scanned"
+        self.qr_text = "QR scanné"
         if self.redraw == False and self.redraw_complete == True:
             self.draw.rectangle((30, 205, 210, 235), outline=View.color, fill=View.color)
             tw, th = self.draw.textsize(self.qr_text, font=View.ASSISTANT22)
             self.draw.text(((240 - tw) / 2, 205), self.qr_text, fill="BLACK", font=View.ASSISTANT22)
             View.DispShowImage()
             self.redraw = True
-        

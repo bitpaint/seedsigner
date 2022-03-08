@@ -15,19 +15,24 @@ class SettingsToolsView(View):
     ### Donate Menu Item
 
     def display_donate_info_screen(self):
-        self.draw_modal(["You can support", "SeedSigner by donating", "any amount of BTC", "Thank You!!!"], "", "(Press right for a QR code)")
+        self.draw_modal(["Vous pouvez supporter", "SeedSigner en envoyant", "n'importe quel somme en BTC", "Merci !!!"], "", "(Appuyez Droite pour un QR code)")
         return True
 
     def display_donate_qr(self):
+<<<<<<< Updated upstream
         self.draw_modal(["Loading..."])
         self.donate_image = self.qr.qrimage("bc1qphlyv2dde290tqdlnk8uswztnshw3x9rjurexqqhksvu7vdevhtsuw4efe")
+=======
+        self.draw_modal(["Chargement..."])
+        self.donate_image = self.qr.qrimage("bc1q8u3dyltlg6pu56fe7m58aqz9cwrfld0s03zlrjl0wvm9x4nfa60q2l0g97")
+>>>>>>> Stashed changes
         View.DispShowImage(self.donate_image)
         return True
 
     ### Display Network Selection
 
     def display_current_network(self) -> str:
-        r = self.controller.menu_view.display_generic_selection_menu(["... [ Return to Settings ]", "Mainnet", "Testnet"], "Which Network?")
+        r = self.controller.menu_view.display_generic_selection_menu(["... [ Retour aux paramètres ]", "Mainnet", "Testnet"], "Quel réseau?")
         if r == 2:
             return "main"
         elif r == 3:
@@ -38,7 +43,11 @@ class SettingsToolsView(View):
     ### Display Wallet Selection
 
     def display_wallet_selection(self) -> str:
+<<<<<<< Updated upstream
         r = self.controller.menu_view.display_generic_selection_menu(["... [ Return to Settings ]", "Prompt", "Specter Desktop", "Blue Wallet", "Sparrow"], "Which Wallet?")
+=======
+        r = self.controller.menu_view.display_generic_selection_menu(["... [ Retour aux paramètres ]", "Specter Desktop", "Blue Wallet", "Sparrow", "UR 2.0 Generic"], "Quel porte-monnaie?")
+>>>>>>> Stashed changes
         if r == 2:
             return "Prompt"
         elif r == 3:
@@ -53,7 +62,7 @@ class SettingsToolsView(View):
     ### Display QR Density Selection
 
     def display_qr_density_selection(self) -> str:
-        r = self.controller.menu_view.display_generic_selection_menu(["... [ Return to Settings ]", "Low", "Medium", "High"], "Which QR Density?")
+        r = self.controller.menu_view.display_generic_selection_menu(["... [ Retour aux paramètres ]", "Basse", "Moyenne", "Haute"], "Quelle densitée QR?")
         if r == 2:
             return EncodeQRDensity.LOW
         elif r == 3:
@@ -78,6 +87,14 @@ class SettingsToolsView(View):
         else:
             return None
 
+<<<<<<< Updated upstream
+=======
+        lines = ["... [ Retour aux paramètres ]"]
+        if "PKWSH" in self.controller.wallet.avaliable_wallet_policies():
+            lines.append("Multi Sig Native Segwit")
+        if "PKWPKH" in self.controller.wallet.avaliable_wallet_policies():
+            lines.append("Single Sig Native Segwit")
+>>>>>>> Stashed changes
 
     def display_camera_rotation(self) -> int:
         lines = ["... [ Return to Settings ]"]
@@ -86,7 +103,11 @@ class SettingsToolsView(View):
         lines.append("180°")
         lines.append("270°")
 
+<<<<<<< Updated upstream
         r = self.controller.menu_view.display_generic_selection_menu(lines, "Camera Rotation")
+=======
+        r = self.controller.menu_view.display_generic_selection_menu(lines, "Quel type de portefeuille??")
+>>>>>>> Stashed changes
         if r == 1:
             return None
         elif r == 2:
@@ -105,7 +126,7 @@ class SettingsToolsView(View):
     ###
 
     def display_version_info(self):
-    
+
         line1 = "SeedSigner"
         line2 = "Version v" + self.controller.VERSION
         line3 = "(Joystick RIGHT to EXIT)"
